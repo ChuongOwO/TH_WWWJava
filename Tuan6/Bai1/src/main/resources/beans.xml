@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+    <!-- Student - Class_ -->
+    <!-- Inject by setter -->
+    <bean id="student1" class="iuh.fit.se.Student">
+        <property name="id" value="001"/>
+        <property name="name" value="Phan Khanh Chuong"/>
+    </bean>
+
+    <bean id="class1" class="iuh.fit.se.Class_">
+        <property name="classId" value="DHKTPM18A"/>
+        <property name="className" value="Dai Hoc KTPM18A"/>
+    </bean>
+
+    <bean id="student2" class="iuh.fit.se.Student">
+        <property name="id" value="001"/>
+        <property name="name" value="Phan Khanh Chuong"/>
+        <property name="class_" ref="class1"/>
+    </bean>
+
+    <!-- Inject by constructor -->
+    <bean id="student3" class="iuh.fit.se.Student">
+        <constructor-arg name="id" value="001"/>
+        <constructor-arg name="name" value="Giap Viet Hoang"/>
+        <constructor-arg name="class_" ref="class1"/>
+    </bean>
+
+
+    <!-- Address - Person -->
+    <bean id="address1" class="iuh.fit.se.Address">
+        <property name="street" value="Nguyen Van Bao"/>
+        <property name="city" value="HCM"/>
+        <property name="country" value="Viet Nam"/>
+    </bean>
+
+    <bean id="address2" class="iuh.fit.se.Address">
+        <property name="street" value="Nguyen Thai Son"/>
+        <property name="city" value="HCM"/>
+        <property name="country" value="Viet Nam"/>
+    </bean>
+
+    <bean id="person1" class="iuh.fit.se.Person">
+        <property name="name" value="Nguyen Van A"/>
+        <property name="addresses">
+            <list>
+                <ref bean="address1"/>
+                <ref bean="address2"/>
+            </list>
+        </property>
+        <property name="emails">
+            <list>
+                <value>a2@gmail.com</value>
+                <value>b3@gmail.com</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- Location -->
+    <bean id="classProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:class.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="class2" class="iuh.fit.se.Class_">
+        <property name="classId" value="DHKTPM"/>
+        <property name="className" value="${className}"/>
+    </bean>
+
+</beans>
